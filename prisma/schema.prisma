@@ -12,7 +12,12 @@ datasource db {
 }
 
 model Listing {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    id                  String   @id @default(cuid())
+    createdAt           DateTime @default(now())
+    updatedAt           DateTime @updatedAt
+    name                String
+    description         String
+    price               Float
+    userId              String
+
 }

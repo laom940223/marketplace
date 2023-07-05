@@ -1,4 +1,5 @@
 import { SignInButton, SignOutButton, UserButton, useUser } from "@clerk/nextjs"
+import Link from "next/link"
 
 
 const NavBar = ()=>{
@@ -27,6 +28,11 @@ const NavBar = ()=>{
         <li>
           <a href="#" className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Home</a>
         </li>
+
+        <li>
+          <Link href="/sell-an-item" className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Sell an item</Link>
+        </li>
+
         <li>
 
             {isSignedIn? 
