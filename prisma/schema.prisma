@@ -20,4 +20,22 @@ model Listing {
     price               Float
     userId              String
 
+
+    messages            Message[]
+}
+
+
+
+model Message {
+
+    id      String   @id @default(cuid())
+    createdAt           DateTime @default(now())
+    updatedAt           DateTime @updatedAt
+    fromUserId          String
+    toUserId            String
+    message             String
+    listing             Listing @relation(fields: [listingId], references: [id])
+    listingId           String   
+
+
 }

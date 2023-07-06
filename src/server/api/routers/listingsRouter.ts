@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "y/server/api/trpc";
+import { getUserInfo } from "y/server/utils/attachUserInfo";
 
 
 const DEFAULT_LISTINGS = 25
@@ -15,17 +16,32 @@ export const listingsRouter = createTRPCRouter({
           }))
           .query(async({ctx, input})=>{
 
-
-            const {prisma} = ctx
-
+            const { prisma } = ctx
             const listings = await prisma.listing.findMany()
-
+              
             return listings
 
           }),
 
 
-  
+  getListingById: publicProcedure
+          .input(z.object({
+              id: z.string()
+          }))
+          
+          .query(async( {ctx, input} )=>{
+          
+              const { prisma } = ctx
+
+              const listing = await prisma.listing.findUniqueOrThrow({where: {
+                id: input.id
+              }})
+
+              const user = await getUserInfo(listing?.userId)
+
+              return { listing, user  }
+          })
+          ,
 
 
   createListing: protectedProcedure

@@ -114,7 +114,8 @@ const enforceAuth =t.middleware( async({ ctx, next })=>{
 
   return next({
     ctx:{
-      auth: ctx.auth
+      auth: ctx.auth,
+      prisma:ctx.prisma
     }
   })
 
